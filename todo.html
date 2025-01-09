@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo App</title>
+    <link rel="stylesheet" href="shaim.css"> 
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <input type="text" placeholder="New Todo" id="new-task">
+            <button>Add new task</button>
+        </div>
+        <div class="filters">
+            <button class="active">All</button>
+            <button>Done</button>
+            <button>Todo</button>
+        </div>
+        <ul class="task-list">
+            <li class="task-item completed">
+                <span class="task-text">Learn ReactJS basics</span>
+                <div class="controls">
+                    <input type="checkbox" checked>
+                    <button>Edit</button>
+                    <button>Delete</button>
+                </div>
+            </li>
+            <li class="task-item">
+                <span class="task-text">Practice ReactJS</span>
+                <div class="controls">
+                    <input type="checkbox">
+                    <button>Edit</button>
+                    <button>Delete</button>
+                </div>
+            </li>
+            <li class="task-item">
+                <span class="task-text">Learn Redux</span>
+                <div class="controls">
+                    <input type="checkbox">
+                    <button>Edit</button>
+                    <button>Delete</button>
+                </div>
+            </li>
+        </ul>
+        <div class="footer">
+            <button>Delete done tasks</button>
+            <button>Delete all tasks</button>
+        </div>
+    </div>
+</body>
+</html>
