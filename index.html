@@ -3,9 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Todo</title>
+    <title>local host</title>
+    <link rel="stylesheet" href="style.css"> <!-- ربط ملف CSS -->
 </head>
 <body>
-    
+    <h1 style="text-align: center;">TodoInput</h1>
+    <div class="container1">
+        <div class="header">
+        
+            <input type="text" placeholder="New Todo" id="new-task">
+             <br/>
+            <button class="button">Add new task</button>
+        </div> </div> 
+        <center>
+            <h1 style="text-align: center;">TodoList</h1>
+
+        <div class="container">
+        <div class="filters">
+            <button class="btn">All</button>
+            <button class="btn">Done</button>
+            <button class="btn">Todo</button>
+        </div> 
+        <ul class="task-list">
+            <li class="task-item completed">
+                <span class="task-text">Learn ReactJS basics</span>
+                <div class="controls">
+                    <input type="checkbox" checked>
+                    <div class="icons"><i class="fa-solid fa-pencil"></i> </div>
+                    <div class="icons"><i class="fa-solid fa-trash"></i> </div>
+                </div>
+            </li>
+            <li class="task-item">
+                <span class="task-text">Practice ReactJS</span>
+                <div class="controls">
+                    <input type="checkbox">
+                    <div class="icons"><i class="fa-solid fa-pencil"></i> </div>
+                    <div class="icons"><i class="fa-solid fa-trash"></i> </div>
+                </div>
+            </li>
+            <li class="task-item">
+                <span class="task-text">Learn Redux</span>
+                <div class="controls">
+                    <input type="checkbox">
+                    <i class="fa-solid fa-pencil"></i> 
+                    <div class="icons"><i class="fa-solid fa-trash"></i> </div>
+                </div>
+            </li>
+        </ul>
+        <div class="footer">
+            <button>Delete done tasks</button>
+            <button>Delete all tasks</button>
+        </div>
+    </div> 
+        </div>
+        </center>
 </body>
 </html>

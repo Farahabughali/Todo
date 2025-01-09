@@ -1,0 +1,123 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    padding: 20px;
+    background-color: #f7f7f7;
+    justify-content: space-between;
+    justify-content: center;
+}
+
+.container1 {
+    max-width: 600px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.container {
+    max-width: 600px;
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-bottom: 210px0px;
+}
+
+input[type="text"] {
+    flex-direction: column;
+    display: flex;
+    padding: 10px;
+    padding-right: 50px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    
+}
+
+.button {
+    padding: 10px 10px;
+    background-color: #17a2b8;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    
+ justify-content: center;
+}
+
+
+button:hover {
+    background-color: #138f9e;
+}
+.btn{
+    padding: 10px 20px;
+    background-color: #17a2b8;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 31%;
+    
+ justify-content: center;
+}
+.btn:hover{
+    background-color: #025663;
+
+}
+.filters button {
+    margin: 5px;
+    background-color: #17a2b8;
+}
+
+.filters button.active {
+    background-color: #138f9e;
+}
+
+.task-list {
+    list-style: none;
+    padding: 0;
+}
+
+.task-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.task-item.completed .task-text {
+    text-decoration: line-through;
+    color: #aaa;
+}
+
+.controls {
+    display: flex;
+    gap: 10px;
+}
+.controls icons{
+
+}
+.footer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.footer button {
+    width: 50%; 
+    margin: 5px;
+    padding: 5px;
+    background-color: #c05660;
+    border: none;
+    color: white;
+}
+
+.footer button:hover {
+    background-color:#c82333;
+}
