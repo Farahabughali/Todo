@@ -3,59 +3,102 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>local host</title>
-    <link rel="stylesheet" href="style.css"> <!-- ربط ملف CSS -->
-</head>
-<body>
-    <h1 style="text-align: center;">TodoInput</h1>
-    <div class="container1">
-        <div class="header">
-        
-            <input type="text" placeholder="New Todo" id="new-task">
-             <br/>
-            <button class="button">Add new task</button>
-        </div> </div> 
-        <center>
-            <h1 style="text-align: center;">TodoList</h1>
+    <title>TodoInput</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+    <script src="script.js"></script>
 
-        <div class="container">
-        <div class="filters">
-            <button class="btn">All</button>
-            <button class="btn">Done</button>
-            <button class="btn">Todo</button>
-        </div> 
-        <ul class="task-list">
-            <li class="task-item completed">
-                <span class="task-text">Learn ReactJS basics</span>
-                <div class="controls">
-                    <input type="checkbox" checked>
-                    <div class="icons"><i class="fa-solid fa-pencil"></i> </div>
-                    <div class="icons"><i class="fa-solid fa-trash"></i> </div>
-                </div>
-            </li>
-            <li class="task-item">
-                <span class="task-text">Practice ReactJS</span>
-                <div class="controls">
-                    <input type="checkbox">
-                    <div class="icons"><i class="fa-solid fa-pencil"></i> </div>
-                    <div class="icons"><i class="fa-solid fa-trash"></i> </div>
-                </div>
-            </li>
-            <li class="task-item">
-                <span class="task-text">Learn Redux</span>
-                <div class="controls">
-                    <input type="checkbox">
-                    <i class="fa-solid fa-pencil"></i> 
-                    <div class="icons"><i class="fa-solid fa-trash"></i> </div>
-                </div>
-            </li>
-        </ul>
-        <div class="footer">
-            <button>Delete done tasks</button>
-            <button>Delete all tasks</button>
+<body>
+    <div class="container">
+        <h1>TodoInput</h1>
+        <div class="input-section">
+    <div class="input-container">
+        <span class="icon-button"><i class="fa-solid fa-book"></i></span>
+        <input type="text" id="todoInput" placeholder="New Todo">
+    </div>
+    <p id="errorMessage" style="color: red; display: none; font-size: 14px; margin-top: 5px;"></p>
+    <button class="add-btn" onclick="validateAndAddTodo()">Add new task</button>
+</div>
+
+        <h2>Todo List</h2>
+        <div class="filter-buttons">
+            <button class="filter-btn" onclick="filterTodos('all')">All</button>
+            <button class="filter-btn" onclick="filterTodos('done')">Done</button>
+            <button class="filter-btn" onclick="filterTodos('todo')">Todo</button>
         </div>
-    </div> 
+        
+        <div id="todoList">
+            <div class="todo-item">
+                <span class="todo-text">Welcome to Todo manager Task</span>
+                <div class="action-buttons">
+                    <input type="checkbox" class="todo-checkbox">
+                    <button class="edit-btn" onclick="openModel($todo.id)"><i class="fa-solid fa-pencil"></i></button>
+                    <button class="delete-btn"><i class="fa-solid fa-trash"></i></button>
+                </div>
+            </div>
+            <div class="todo-item">
+                <span class="todo-text">In this Task you are going to build your own custom logic to create todo manager</span>
+                <div class="action-buttons">
+                    <input type="checkbox" class="todo-checkbox">
+
+                    <button class="edit-btn" onclick="openModel($todo.id)"><i class="fa-solid fa-pencil"></i></button>
+                    <button class="delete-btn"><i class="fa-solid fa-trash"></i></button>
+                </div>
+            </div>
+            <div class="todo-item">
+                <span class="todo-text">Task objectives is:</span>
+                <div class="action-buttons">
+                    <input type="checkbox" class="todo-checkbox">
+
+                    <button class="edit-btn" onclick="openModel($todo.id)"><i class="fa-solid fa-pencil"></i></button>
+                    <button class="delete-btn"><i class="fa-solid fa-trash"></i></button>
+                </div>
+            </div>
+            <div class="todo-item">
+                <span class="todo-text">a. DOM manipulation</span>
+                <div class="action-buttons">
+                    <input type="checkbox" class="todo-checkbox">
+
+                    <button class="edit-btn" onclick="openModel($todo.id)"><i class="fa-solid fa-pencil"></i></button>
+                    <button class="delete-btn"><i class="fa-solid fa-trash"></i></button>
+                </div>
+            </div>
+            <div class="todo-item">
+                <span class="todo-text">b. Event Handling</span>
+                <div class="action-buttons">
+                    <input type="checkbox" class="todo-checkbox">
+
+                    <button class="edit-btn" onclick="openModel($todo.id)"><i class="fa-solid fa-pencil"></i></button>
+                    <button class="delete-btn"><i class="fa-solid fa-trash"></i></button>
+                </div>
+            </div>
+            <div class="todo-item">
+                <span class="todo-text">c. Data storing (Sessions or cookies)</span>
+                <div class="action-buttons">
+                    <input type="checkbox" class="todo-checkbox">
+
+                    <button class="edit-btn" onclick="openModel($todo.id)"><i class="fa-solid fa-pencil"></i></button>
+                    <button class="delete-btn"><i class="fa-solid fa-trash"></i></button>
+                </div>
+            </div>
         </div>
-        </center>
+       
+
+        <div class="bottom-buttons">
+            <button class="bottom-delete-btn" onclick="deleteDoneTasks()">Delete Done Tasks</button>
+            <button class="bottom-delete-btn" onclick="deleteAllTasks()">Delete All Tasks</button>
+        </div>
+    </div>
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <h3>Rename Task</h3>
+            <input type="text" id="editInput" placeholder="Edit your task">
+            <div class="modal-buttons">
+                <button onclick="saveEdit()" class="save-btn">Save</button>
+                <button onclick="closeModal()" class="cancel-btn">Cancel</button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
