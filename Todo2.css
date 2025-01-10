@@ -1,0 +1,277 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border-radius: 8px;
+}
+
+h1, h2 {
+    text-align: center;
+    color: #333;
+    margin: 20px 0;
+}
+
+.input-section {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    margin-bottom: 20px;
+}
+
+.input-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.icon-button {
+    background-color: #20B2AA; 
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.icon-button i {
+    font-size: 20px;
+}
+
+input[type="text"] {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+}
+
+.add-btn {
+    background-color: #20B2AA;
+    color: white;
+    border: none;
+    padding: 12px;
+    width: 100%;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.filter-buttons {
+    display: flex;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.filter-btn {
+    flex: 1;
+    padding: 12px;
+    background-color: #006D77;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.todo-item {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    background: white;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    
+}
+
+.todo-checkbox {
+    margin-right: 10px;
+    width: 20px;
+    height: 20px;
+}
+
+.todo-text {
+    flex: 1;
+    margin: 0;
+    font-size: 16px;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 5px;
+}
+
+.edit-btn, .delete-btn {
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 5px;
+    font-size: 18px;
+}
+
+.edit-btn {
+    color: #FFB700;
+}
+
+.delete-btn {
+    color: #DC3545;
+}
+
+.modal {
+    display: none; /* الإخفاء الافتراضي */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 300px;
+    text-align: center;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.save-btn {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.cancel-btn {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.bottom-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.bottom-delete-btn {
+    flex: 1;
+    padding: 12px;
+    background-color: #DC3545;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.completed {
+    text-decoration: line-through;
+    color: #888;
+}
+
+.todo-item {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    background: white;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    position: relative; /* Add this for icon positioning */
+}
+
+.task-actions {
+    position: absolute;
+    right: 10px;
+    display: flex;
+    gap: 10px;
+}
+
+.checkbox-wrapper {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+
+.todo-text {
+    flex: 1;
+    margin-right: 80px; /* Space for icons */
+}
+
+.icon-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    font-size: 16px;
+    color: #666;
+}
+
+.edit-icon {
+    color: #ffd700;
+}
+
+.delete-icon {
+    color: #dc3545;
+}
+
+/* Style for the icons container */
+.action-icons {
+    display: flex;
+    gap: 10px;
+    margin-left: auto;
+}
+
+/* Update bottom buttons style */
+.bottom-delete-btn {
+    flex: 1;
+    padding: 12px;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    text-align: center;
+}
+
+.task-icon {
+    font-size: 16px;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.pencil-icon {
+    color: #FFB700;
+}
+
+.trash-icon {
+    color: #DC3545;
+}
