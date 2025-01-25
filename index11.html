@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo Manager</title>
+    <link rel="stylesheet" href="shaim.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+    <script defer>
+        let tasks = [];
+        let activeFilter = 'all';
+
+        function initializeTasks() {
+    const storedTasks = localStorage.getItem('tasks');
+    if (storedTasks) {
+        tasks = JSON.parse(storedTasks);
+    } else {
+        tasks = [
+            { id: 1, text: "Learn ReactJS basics", completed: true },
+            { id: 2, text: "Practice ReactJS", completed: false },
+            { id: 3, text: "Learn Redux", completed: false },
+            { id: 4, text: "Code portfolio in React", completed: false },
+            { id: 5, text: "Learn React Native", completed: false }
+        ];
+        storeTasks();
+    }
+    displayTasks();
+}
+
+
+        function storeTasks() {
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+        }
+
+        function addTask() {
+            const input = document.getElementById('todoInput');
+            const errorMessage = document.getElementById('errorMessage');
+            const text = input.value.trim();
+
+            if (text === '') {
+                errorMessage.textContent = "Task cannot be empty";
+                errorMessage.style.display = 'block';
+                return;
+            }
+
+            if (!isNaN(text.charAt(0))) {
+                errorMessage.textContent = "Task cannot start with a number";
+                errorMessage.style.display = 'block';
+                return;
+            }
+
+            if (text.length < 5) {
+                errorMessage.textContent = "Task must be at least 5 characters";
+                errorMessage.style.display = 'block';
+                return;
+            }
+
+            if (hasArabicChars(text)) {
+                errorMessage.textContent = "Task cannot contain Arabic characters";
+                errorMessage.style.display = 'block';
+                return;
+            }
+
+            function hasArabicChars(text) {
+                for (let i = 0; i < text.length; i++) {
+                    const charCode = text.charCodeAt(i);
+                    if (charCode >= 0x0600 && charCode <= 0x06FF) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+
+            errorMessage.style.display = 'none';
+            tasks.push({
+                id: Date.now(),
+                text: text,
+                completed: false
+            });
+            input.value = '';
+            storeTasks();
+            displayTasks();
+        }
+
+        function removeTask(id) {
+            tasks = tasks.filter(task => task.id !== id);
+            storeTasks();
+            displayTasks();
+        }
+
+        function toggleTaskCompletion(id) {
+            tasks = tasks.map(task => {
+                if (task.id === id) {
+                    return { ...task, completed: !task.completed };
+                }
+                return task;
+            });
+            storeTasks();
+            displayTasks();
+        }
+
+        function setFilter(filter) {
+            activeFilter = filter;
+            displayTasks();
+        }
+
+        function clearCompletedTasks() {
+            tasks = tasks.filter(task => !task.completed);
+            storeTasks();
+            displayTasks();
+        }
+
+        function clearTasks() {
+            const confirmation = confirm("Are you sure you want to delete all tasks?");
+            if (confirmation) {
+                tasks = [];
+                localStorage.removeItem('tasks');
+                displayTasks();
+            }
+        }
+
+        function displayTasks() {
+            const todoList = document.getElementById('todoList');
+            todoList.innerHTML = '';
+
+            let filteredTasks = tasks;
+            if (activeFilter === 'done') {
+                filteredTasks = tasks.filter(task => task.completed);
+            } else if (activeFilter === 'todo') {
+                filteredTasks = tasks.filter(task => !task.completed);
+            }
+
+            filteredTasks.forEach(task => {
+                const taskItem = document.createElement('div');
+                taskItem.className = 'task-item';
+                taskItem.innerHTML = `
+                    <input type="checkbox" class="task-checkbox" 
+                           ${task.completed ? 'checked' : ''} 
+                           onchange="toggleTaskCompletion(${task.id})">
+                    <span class="task-text ${task.completed ? 'completed' : ''}">${task.text}</span>
+                    <div class="action-buttons">
+                        <button class="edit-btn" onclick="showEditModal(${task.id})">✎</button>
+                        <button class="delete-btn" onclick="removeTask(${task.id})">🗑</button>
+                    </div>
+                `;
+                todoList.appendChild(taskItem);
+            });
+        }
+
+        function showEditModal(id) {
+            const task = tasks.find(t => t.id === id);
+            if (task) {
+                const updatedText = prompt('Edit task:', task.text);
+                if (updatedText !== null && updatedText.trim() !== '') {
+                    tasks = tasks.map(t => {
+                        if (t.id === id) {
+                            return { ...t, text: updatedText.trim() };
+                        }
+                        return t;
+                    });
+                    storeTasks();
+                    displayTasks();
+                }
+            }
+        }
+
+        document.getElementById('todoInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                addTask();
+            }
+        });
+
+        initializeTasks();
+        
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Todo Manager</h1>
+        <div class="input-section">
+            <div class="input-container">
+                <span class="icon-button"><i class="fa-solid fa-book"></i></span>
+                <input type="text" id="todoInput" placeholder="New Todo">
+            </div>
+            <p id="errorMessage" style="color: red; display: none; font-size: 14px; margin-top: 5px;"></p>
+            <button class="add-btn" onclick="addTask()">Add New Task</button>
+        </div>
+
+        <h2>Todo List</h2>
+        <div class="filter-buttons">
+            <button class="filter-btn" onclick="setFilter('all')">All</button>
+            <button class="filter-btn" onclick="setFilter('done')">Done</button>
+            <button class="filter-btn" onclick="setFilter('todo')">Todo</button>
+        </div>
+
+        <div id="todoList"></div>
+
+        <div class="bottom-buttons">
+            <button class="bottom-delete-btn" onclick="clearCompletedTasks()">Delete Done Tasks</button>
+            <button class="bottom-delete-btn" onclick="clearTasks()">Delete All Tasks</button>
+        </div>
+    </div>
+
+</body>
+</html>
