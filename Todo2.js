@@ -26,20 +26,39 @@ function validateAndAddTodo() {
   const errorMessage = document.getElementById('errorMessage');
   const text = input.value.trim();
 
+  // التحقق من أن النص ليس فارغًا
   if (text === '') {
       errorMessage.textContent = "Task cannot be empty";
       errorMessage.style.display = 'block';
       return;
-  } else if (!isNaN(text.charAt(0))) {
+  }
+
+  // التحقق من أن النص لا يبدأ برقم
+  if (!isNaN(text.charAt(0))) {
       errorMessage.textContent = "Task cannot start with a number";
-      errorMessage.style.display = 'block';
-      return;
-  } else if (text.length < 5) {
-      errorMessage.textContent = "Task must be at least 5 characters";
       errorMessage.style.display = 'block';
       return;
   }
 
+  if (text.length < 5) {
+      errorMessage.textContent = "Task must be at least 5 characters";
+      errorMessage.style.display = 'block';
+      return;
+  }
+ if (containsArabicCharacters(text)) {
+      errorMessage.textContent = "Task cannot contain Arabic characters";
+      errorMessage.style.display = 'block';
+      return;
+  }
+  function containsArabicCharacters(text) {
+    for (let i = 0; i < text.length; i++) {
+        const charCode = text.charCodeAt(i);
+        if (charCode >= 0x0600 && charCode <= 0x06FF) {
+            return errorMessage.; 
+        }
+    }
+    return false; 
+  }
   errorMessage.style.display = 'none';
   todos.push({
       id: Date.now(),
@@ -50,6 +69,7 @@ function validateAndAddTodo() {
   saveTodos();
   renderTodos();
 }
+
 
 function addTodo() {
   const input = document.getElementById('todoInput');
@@ -154,7 +174,6 @@ function renderTodos() {
 
 let currentEditId = null;
 
-// فتح النافذة المنبثقة
 function openModal(id) {
     const todo = todos.find(t => t.id === id);
     if (todo) {
@@ -164,12 +183,10 @@ function openModal(id) {
     }
 }
 
-// إغلاق النافذة المنبثقة
 function closeModal() {
     document.getElementById('editModal').style.display = 'none';
 }
 
-// حفظ التعديلات
 function saveEdit() {
     const newText = document.getElementById('editInput').value.trim();
     if (newText !== '' && currentEditId !== null) {
@@ -190,36 +207,33 @@ document.getElementById('todoInput').addEventListener('keypress', function(e) {
       addTodo();
   }
 });
-// فتح نافذة التعديل
 function editTodo(id) {
   const todo = todos.find(t => t.id === id);
   if (todo) {
-      document.getElementById('editInput').value = todo.text; // تعبئة النص الحالي
-      editId = id; // تخزين الـ id
-      document.getElementById('editModal').style.display = 'flex'; // إظهار النافذة
+      document.getElementById('editInput').value = todo.text; 
+      editId = id; 
+      document.getElementById('editModal').style.display = 'flex'; 
   }
 }
 
-// حفظ التعديلات
 function saveEdit() {
   const newText = document.getElementById('editInput').value.trim();
   if (newText && editId !== null) {
       todos = todos.map(todo => {
           if (todo.id === editId) {
-              return { ...todo, text: newText }; // تحديث النص
+              return { ...todo, text: newText }; 
           }
           return todo;
       });
       saveTodos();
       renderTodos();
-      closeModal(); // إغلاق النافذة
+      closeModal(); 
   }
 }
 
-// إغلاق النافذة
 function closeModal() {
   document.getElementById('editModal').style.display = 'none';
-  editId = null; // إعادة تعيين المتغير
+  editId = null; 
 }
 
 
